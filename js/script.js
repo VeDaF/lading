@@ -1,5 +1,4 @@
 window.addEventListener('DOMContentLoaded', function () {
-
     'use strict';
     let tab = document.querySelectorAll('.info-header-tab'),
         info = document.querySelector('.info-header'),
@@ -32,24 +31,23 @@ window.addEventListener('DOMContentLoaded', function () {
                 }
             }
         }
-
     });
 
-    // Timer 
+    // Timer
 
-    let deadline = '2018-11-21';
+    let deadline = '2020-08-21';
 
     function getTimeRemaining(endtime) {
         let t = Date.parse(endtime) - Date.parse(new Date()),
             seconds = Math.floor((t / 1000) % 60),
             minutes = Math.floor((t / 1000 / 60) % 60),
-            hours = Math.floor((t / (1000 * 60 * 60)));
+            hours = Math.floor(t / (1000 * 60 * 60));
 
         return {
-            'total': t,
-            'hours': hours,
-            'minutes': minutes,
-            'seconds': seconds
+            total: t,
+            hours: hours,
+            minutes: minutes,
+            seconds: seconds,
         };
     }
 
@@ -67,7 +65,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 if (num <= 9) {
                     return '0' + num;
                 } else return num;
-            };
+            }
 
             hours.textContent = addZero(t.hours);
             minutes.textContent = addZero(t.minutes);
@@ -80,8 +78,21 @@ window.addEventListener('DOMContentLoaded', function () {
                 seconds.textContent = '00';
             }
         }
-
     }
 
     setClock('timer', deadline);
+    let more = document.querySelector('.more'),
+        overlay = document.querySelector('.overlay'),
+        close = document.querySelector('.popup-close');
+    more.addEventListener('click', function () {
+        overlay.style.display = 'block';
+        this.classList.add('more-splash');
+        document.body.style.overflow = 'hidden';
+    });
+    close.addEventListener('click', function () {
+        overlay.style.display = 'none';
+        more.classList.remove('more-splash');
+        document.body.style.overflow = '';
+    });
+
 });
